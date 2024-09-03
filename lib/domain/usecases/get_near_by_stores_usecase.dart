@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:mask_info_clean_arch/domain/entities/location.dart';
 import 'package:mask_info_clean_arch/domain/entities/permission.dart';
 import 'package:mask_info_clean_arch/domain/entities/store.dart';
@@ -5,6 +6,7 @@ import 'package:mask_info_clean_arch/domain/permission/location_permission_hendl
 import 'package:mask_info_clean_arch/domain/repositories/location_repository.dart';
 import 'package:mask_info_clean_arch/domain/repositories/store_repository.dart';
 
+@singleton
 class GetNearByStoresUsecase {
   final StoreRepository _storeRepository;
   final LocationRepository _locationRepository;
@@ -28,10 +30,11 @@ class GetNearByStoresUsecase {
     //> 권한 체크
     if (isServiceEnabled) {
       //>> 현재 위치 권한 정보
-      final permission = await _locationPermissionHendler.checkPermission();
+      var permission = await _locationPermissionHendler.checkPermission();
 
       //>> 거부 -> 정렬없이 리턴
       if (permission == Permission.denied) {
+        permission = await _locationPermissionHendler.requestPermission();
         print("거부");
         return stores;
       }

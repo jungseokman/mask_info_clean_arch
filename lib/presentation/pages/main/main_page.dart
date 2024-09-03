@@ -3,8 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_info_clean_arch/presentation/bloc/main/main_bloc.dart';
 import 'package:mask_info_clean_arch/presentation/pages/main/widgets/store_item.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<MainBloc>().add(GetStores());
+  }
 
   @override
   Widget build(BuildContext context) {

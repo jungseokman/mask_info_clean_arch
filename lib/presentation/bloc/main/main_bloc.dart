@@ -1,11 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mask_info_clean_arch/domain/entities/store.dart';
 import 'package:mask_info_clean_arch/domain/usecases/get_near_by_stores_usecase.dart';
 
 part 'main_event.dart';
 part 'main_state.dart';
 
+@injectable
 class MainBloc extends Bloc<MainEvent, MainState> {
   final GetNearByStoresUsecase _getNearByStoresUsecase;
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mask_info_clean_arch/presentation/pages/main/main_page.dart';
+import 'package:mask_info_clean_arch/core/router/router.dart';
+import 'package:mask_info_clean_arch/di/di_setup.dart';
 
 void main(List<String> args) {
+  configureDependencies();
   runApp(const MyApp());
 }
 
@@ -10,13 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: "Flutter Demo",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MainPage(),
+      routerConfig: router,
     );
   }
 }
